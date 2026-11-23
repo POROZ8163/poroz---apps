@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101b2b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="POROZ">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>POROZ | Renovation Management</title>
+<style>
+:root{--bg:#0c1421;--panel:#142238;--panel2:#1a2b43;--line:#293d58;--text:#eef4fb;--muted:#9db0c7;--silver:#c5d1df;--blue:#6ea6dc;--gold:#c6a66b;--green:#62c39b;--red:#e18484;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#0b1422,#101d30 60%,#0b1422);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:88px}
+header{position:sticky;top:0;z-index:5;background:rgba(12,20,33,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 14px) 18px 14px}
+.brand{display:flex;align-items:center;gap:11px}.mark{width:42px;height:42px;border:1px solid #7893b2;border-radius:13px;display:grid;place-items:center;color:#dce8f5;font-weight:900;font-size:18px;letter-spacing:-2px;background:linear-gradient(145deg,#243b59,#101b2b);box-shadow:0 5px 20px #0005}.brand strong{letter-spacing:3px;font-size:20px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:3px}
+main{max-width:760px;margin:auto;padding:20px 16px}.eyebrow{font-size:11px;color:var(--blue);letter-spacing:2px;font-weight:700}.page-title{font-size:25px;margin:6px 0 4px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.stat,.card{background:linear-gradient(145deg,#182a42,#122036);border:1px solid var(--line);border-radius:var(--radius);padding:15px}.stat span{font-size:12px;color:var(--muted)}.stat b{display:block;font-size:25px;margin-top:9px}.stat small{color:var(--blue);font-size:11px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:23px 0 11px}.section-head h3{margin:0;font-size:16px}.btn{border:0;border-radius:12px;padding:11px 14px;background:linear-gradient(135deg,#8bb4dc,#5c8fbe);color:#081523;font-weight:750;font-size:13px}.btn.secondary{background:#233751;color:#dce8f5;border:1px solid #3a526f}.btn.danger{background:#4a2930;color:#ffd7d7}.btn.small{padding:8px 10px;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.item{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.item:last-child{border:0}.item strong{display:block;font-size:14px}.item small{display:block;color:var(--muted);margin-top:4px;font-size:12px}.amount{font-weight:750;white-space:nowrap}.pill{font-size:10px;border-radius:20px;padding:5px 8px;background:#263d59;color:#cfe4fa;display:inline-block}.empty{color:var(--muted);text-align:center;padding:24px 8px;font-size:13px}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:8;background:rgba(12,20,33,.97);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px calc(env(safe-area-inset-bottom) + 8px);backdrop-filter:blur(16px)}
+nav button{background:none;border:0;color:#8499b2;font-size:10px;padding:5px 0;display:grid;gap:4px;justify-items:center}nav button span{font-size:19px}nav button.active{color:#c6def6}
+input,select,textarea{width:100%;background:#0e1a2b;border:1px solid #344a65;color:var(--text);padding:12px;border-radius:11px;font:inherit;margin-top:6px;outline:none}textarea{min-height:76px;resize:vertical}label{display:block;font-size:12px;color:var(--muted);margin:12px 0} .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid .full{grid-column:1/-1}
+.modal{position:fixed;inset:0;background:#0009;z-index:20;display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#142238;border:1px solid var(--line);border-radius:22px 22px 0 0;width:100%;max-width:760px;max-height:88vh;overflow:auto;padding:20px 18px calc(env(safe-area-inset-bottom) + 22px)}.sheet h2{margin:0 0 10px}.close{float:right;background:#263b55;border:0;color:white;border-radius:9px;padding:7px 11px}
+.lineitem{display:grid;grid-template-columns:1fr 72px 92px 30px;gap:6px;align-items:center;margin:8px 0}.lineitem input{margin:0;padding:9px 7px;font-size:12px}.lineitem button{background:#492a32;color:#ffd4d4;border:0;border-radius:8px;padding:8px}
+.total{font-size:22px;font-weight:800;color:#d9eaff;text-align:right;margin:15px 0}.muted{color:var(--muted)}.notice{border:1px solid #66573c;background:#302a20;color:#e8d7b5;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin-top:16px}
+.calc-result{font-size:26px;font-weight:800;margin:10px 0;color:#dcecff}.hidden{display:none!important}
+@media(min-width:650px){main{padding:28px 24px}.grid{grid-template-columns:repeat(4,1fr)}.sheet{border-radius:22px;margin:auto}.modal{align-items:center;padding:20px}}
+@media print{body{background:white;color:#111;padding:0}header,nav,.no-print{display:none!important}main{max-width:none;padding:0}.card,.stat{background:white;color:#111;border:0}.muted,.sub{color:#444}.pill{color:#111;background:#eee}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="mark">PZ</div><div><strong>POROZ</strong><small>RENOVATION MANAGEMENT</small></div></div></header>
+<main id="app"></main>
+<nav id="nav">
+<button data-tab="home" class="active"><span>⌂</span>首页</button>
+<button data-tab="clients"><span>♙</span>客户</button>
+<button data-tab="quotes"><span>▤</span>报价单</button>
+<button data-tab="orders"><span>▣</span>订单</button>
+<button data-tab="calculator"><span>⌗</span>计算器</button>
+</nav>
+<div class="modal" id="modal"><div class="sheet"><button class="close" onclick="closeModal()">关闭 ✕</button><div id="modalBody"></div></div></div>
+<script>
+const $=s=>document.querySelector(s), money=n=>'RM '+Number(n||0).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+const read=k=>JSON.parse(localStorage.getItem('poroz_'+k)||'[]'), save=(k,v)=>localStorage.setItem('poroz_'+k,JSON.stringify(v));
+let tab='home', clients=read('clients'), quotes=read('quotes'), orders=read('orders');
+function persist(){save('clients',clients);save('quotes',quotes);save('orders',orders)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function go(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));render()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+function modal(html){$('#modalBody').innerHTML=html;$('#modal').classList.add('show')}
+function closeModal(){$('#modal').classList.remove('show')}
+function pageHead(k,t,s){return `<div class="eyebrow">${k}</div><h1 class="page-title">${t}</h1><p class="sub">${s}</p>`}
+function render(){
+ if(tab==='home') return home();
+ if(tab==='clients') return clientPage();
+ if(tab==='quotes') return quotePage();
+ if(tab==='orders') return orderPage();
+ if(tab==='calculator') return calcPage();
+}
+function home(){
+ const total=quotes.reduce((a,q)=>a+q.total,0), active=orders.filter(o=>o.status!=='已完成').length;
+ $('#app').innerHTML=pageHead('OVERVIEW','公司概况','POROZ Renovation · 管理工作台')+
+ `<div class="grid"><div class="stat"><span>客户总数</span><b>${clients.length}</b><small>Customer records</small></div><div class="stat"><span>报价单</span><b>${quotes.length}</b><small>Quotation records</small></div><div class="stat"><span>订单进行中</span><b>${active}</b><small>Active projects</small></div><div class="stat"><span>报价总额</span><b style="font-size:19px">${money(total)}</b><small>All quotations</small></div></div>
+ <div class="section-head"><h3>最近报价</h3><button class="btn small secondary" onclick="go('quotes')">查看全部</button></div><div class="card">${quotes.slice().reverse().slice(0,4).map(q=>`<div class="item"><div><strong>${esc(q.title)}</strong><small>${esc(q.client)} · ${esc(q.date)}</small></div><div class="amount">${money(q.total)}</div></div>`).join('')||'<div class="empty">还没有报价单，点击「报价单」开始建立。</div>'}</div>
+ <div class="section-head"><h3>工程订单</h3><button class="btn small secondary" onclick="go('orders')">查看全部</button></div><div class="card">${orders.slice().reverse().slice(0,3).map(o=>`<div class="item"><div><strong>${esc(o.title)}</strong><small>${esc(o.client)} · ${esc(o.status)}</small></div><span class="pill">${esc(o.status)}</span></div>`).join('')||'<div class="empty">目前没有订单记录。</div>'}</div>
+ <div class="notice">资料目前保存在这台设备的浏览器内。请定期使用备份功能导出资料，避免清除浏览器数据后遗失。</div>
+ <div class="section-head"><h3>资料备份</h3></div><div class="actions"><button class="btn secondary" onclick="backup()">导出备份 JSON</button><button class="btn secondary" onclick="document.getElementById('restoreFile').click()">导入备份</button><input id="restoreFile" type="file" accept=".json,application/json" class="hidden" onchange="restore(event)"></div>`;
+}
+function clientPage(){
+ $('#app').innerHTML=pageHead('CUSTOMERS','客户资料','集中管理客户联系资料与装修项目')+`<div class="actions no-print"><button class="btn" onclick="clientForm()">＋ 新增客户</button></div><div class="card" style="margin-top:14px">${clients.map((c,i)=>`<div class="item"><div><strong>${esc(c.name)}</strong><small>${esc(c.phone||'未填写电话')} · ${esc(c.project||'未填写项目')}</small><small>${esc(c.address||'')}</small></div><div class="actions"><button class="btn small secondary" onclick="clientForm(${i})">编辑</button><button class="btn small danger" onclick="del('clients',${i})">删除</button></div></div>`).join('')||'<div class="empty">还没有客户资料。</div>'}</div>`;
+}
+function clientForm(i=-1){
+ const c=i>=0?clients[i]:{name:'',phone:'',email:'',address:'',project:'',notes:''};
+ modal(`<h2>${i>=0?'编辑客户':'新增客户'}</h2><form onsubmit="saveClient(event,${i})"><div class="formgrid">
+ <label>客户姓名<input name="name" required value="${esc(c.name)}"></label><label>联系电话<input name="phone" value="${esc(c.phone)}"></label>
+ <label>电邮<input name="email" value="${esc(c.email)}"></label><label>项目名称<input name="project" value="${esc(c.project)}"></label>
+ <label class="full">工程地址<input name="address" value="${esc(c.address)}"></label><label class="full">备注<textarea name="notes">${esc(c.notes)}</textarea></label></div><button class="btn" type="submit">保存客户</button></form>`);
+}
+function saveClient(e,i){e.preventDefault();let d=Object.fromEntries(new FormData(e.target));if(i<0)clients.push(d);else clients[i]=d;persist();closeModal();clientPage()}
+function quotePage(){
+ $('#app').innerHTML=pageHead('QUOTATION','报价单','建立工程报价，并可打印或另存为 PDF')+`<div class="actions no-print"><button class="btn" onclick="quoteForm()">＋ 新增报价单</button></div><div class="card" style="margin-top:14px">${quotes.map((q,i)=>`<div class="item"><div><strong>${esc(q.title)}</strong><small>${esc(q.no)} · ${esc(q.client)} · ${esc(q.date)}</small><small><span class="pill">${esc(q.status)}</span></small></div><div style="text-align:right"><div class="amount">${money(q.total)}</div><div class="actions" style="margin-top:7px"><button class="btn small secondary" onclick="printQuote(${i})">打印</button><button class="btn small danger" onclick="del('quotes',${i})">删除</button></div></div></div>`).join('')||'<div class="empty">还没有报价单。</div>'}</div>`;
+}
+function quoteForm(){
+ if(!clients.length){modal('<h2>请先新增客户</h2><p class="muted">建立报价单前，需要先有客户资料。</p><button class="btn" onclick="closeModal();go(\'clients\');clientForm()">新增客户</button>');return}
+ const opts=clients.map(c=>`<option>${esc(c.name)}</option>`).join('');
+ modal(`<h2>新增报价单</h2><form id="qform" onsubmit="saveQuote(event)"><div class="formgrid">
+ <label>报价单标题<input name="title" required placeholder="例如：客厅与厨房装修"></label><label>客户<select name="client">${opts}</select></label>
+ <label>日期<input name="date" type="date" value="${new Date().toISOString().slice(0,10)}"></label><label>状态<select name="status"><option>草稿</option><option>已发送</option><option>已接受</option><option>已拒绝</option></select></label></div>
+ <div class="section-head"><h3>报价项目</h3><button type="button" class="btn small secondary" onclick="addLine()">＋ 项目</button></div><div id="lines"><div class="lineitem"><input placeholder="项目说明" required><input type="number" min="0" step=".01" placeholder="数量" value="1"><input type="number" min="0" step=".01" placeholder="单价" value="0"><button type="button" onclick="this.parentElement.remove()">×</button></div></div>
+ <label>备注<textarea name="notes" placeholder="付款条件、报价有效期等"></textarea></label><div class="total" id="liveTotal">RM 0.00</div><button class="btn" type="submit">保存报价单</button></form>`);
+ $('#modalBody').addEventListener('input',updateLive);
+}
+function addLine(){const d=document.createElement('div');d.className='lineitem';d.innerHTML='<input placeholder="项目说明" required><input type="number" min="0" step=".01" placeholder="数量" value="1"><input type="number" min="0" step=".01" placeholder="单价" value="0"><button type="button" onclick="this.parentElement.remove();updateLive()">×</button>';$('#lines').append(d)}
+function updateLive(){let t=0;document.querySelectorAll('.lineitem').forEach(x=>{let a=x.children;t+=(+a[1].value||0)*(+a[2].value||0)});let el=$('#liveTotal');if(el)el.textContent=money(t)}
+function saveQuote(e){e.preventDefault();const f=e.target,items=[...document.querySelectorAll('#lines .lineitem')].map(x=>({desc:x.children[0].value,qty:+x.children[1].value||0,price:+x.children[2].value||0}));let total=items.reduce((s,x)=>s+x.qty*x.price,0),d=Object.fromEntries(new FormData(f));quotes.push({...d,no:'Q-'+Date.now().toString().slice(-7),items,total});persist();closeModal();quotePage()}
+function printQuote(i){const q=quotes[i],w=window.open('','_blank');if(!w){alert('请允许弹出窗口后再打印');return}w.document.write(`<html><head><title>${esc(q.no)}</title><style>body{font:14px Arial;padding:35px;color:#222}h1{letter-spacing:4px}table{width:100%;border-collapse:collapse;margin-top:25px}td,th{border-bottom:1px solid #ddd;padding:12px;text-align:left}.r{text-align:right}.total{text-align:right;font-size:20px;font-weight:bold;margin-top:20px}</style></head><body><h1>POROZ</h1><p>RENOVATION & INTERIOR</p><hr><h2>QUOTATION</h2><p>Quotation No: ${esc(q.no)}<br>Date: ${esc(q.date)}<br>Client: ${esc(q.client)}<br>Project: ${esc(q.title)}</p><table><tr><th>Description</th><th>Qty</th><th>Unit Price</th><th class="r">Amount</th></tr>${q.items.map(x=>`<tr><td>${esc(x.desc)}</td><td>${x.qty}</td><td>${money(x.price)}</td><td class="r">${money(x.qty*x.price)}</td></tr>`).join('')}</table><div class="total">TOTAL: ${money(q.total)}</div><p>${esc(q.notes||'')}</p><br><p>Prepared by POROZ</p><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()}
+function orderPage(){
+ $('#app').innerHTML=pageHead('PROJECT ORDERS','订单管理','跟进工程状态与收款进度')+`<div class="actions no-print"><button class="btn" onclick="orderForm()">＋ 新增订单</button></div><div class="card" style="margin-top:14px">${orders.map((o,i)=>`<div class="item"><div><strong>${esc(o.title)}</strong><small>${esc(o.no)} · ${esc(o.client)}</small><small>合约：${money(o.amount)} · 已收：${money(o.paid)}</small><span class="pill">${esc(o.status)}</span></div><div class="actions"><button class="btn small secondary" onclick="orderForm(${i})">编辑</button><button class="btn small danger" onclick="del('orders',${i})">删除</button></div></div>`).join('')||'<div class="empty">还没有订单记录。</div>'}</div>`;
+}
+function orderForm(i=-1){if(!clients.length){modal('<h2>请先新增客户</h2><button class="btn" onclick="closeModal();go(\'clients\');clientForm()">新增客户</button>');return}
+ const o=i>=0?orders[i]:{title:'',client:clients[0].name,no:'O-'+Date.now().toString().slice(-7),amount:0,paid:0,status:'待开始'};
+ modal(`<h2>${i>=0?'编辑订单':'新增订单'}</h2><form onsubmit="saveOrder(event,${i})"><div class="formgrid">
+ <label class="full">工程名称<input name="title" required value="${esc(o.title)}"></label><label>客户<select name="client">${clients.map(c=>`<option ${c.name===o.client?'selected':''}>${esc(c.name)}</option>`).join('')}</select></label><label>订单编号<input name="no" value="${esc(o.no)}"></label>
+ <label>合约金额 (RM)<input name="amount" type="number" step=".01" value="${o.amount}"></label><label>已收款 (RM)<input name="paid" type="number" step=".01" value="${o.paid}"></label>
+ <label class="full">工程状态<select name="status">${['待开始','进行中','待验收','已完成','暂停'].map(s=>`<option ${o.status===s?'selected':''}>${s}</option>`).join('')}</select></label></div><button class="btn" type="submit">保存订单</button></form>`);
+}
+function saveOrder(e,i){e.preventDefault();let d=Object.fromEntries(new FormData(e.target));d.amount=+d.amount;d.paid=+d.paid;if(i<0)orders.push(d);else orders[i]=d;persist();closeModal();orderPage()}
+function calcPage(){
+ $('#app').innerHTML=pageHead('SITE CALCULATOR','装修计算器','快速换算面积、材料数量与工程金额')+`<div class="card"><h3 style="margin-top:0">面积计算</h3><div class="formgrid"><label>长度 (ft)<input id="len" type="number" value="10" oninput="areaCalc()"></label><label>宽度 (ft)<input id="wid" type="number" value="10" oninput="areaCalc()"></label></div><div class="calc-result" id="sqft">100.00 sqft</div><div class="muted" id="sqm">9.29 m²</div></div>
+ <div class="card" style="margin-top:12px"><h3 style="margin-top:0">材料 / 工程金额</h3><div class="formgrid"><label>数量<input id="qty" type="number" value="1" oninput="priceCalc()"></label><label>单价 (RM)<input id="unit" type="number" value="0" step=".01" oninput="priceCalc()"></label></div><div class="calc-result" id="priceTotal">RM 0.00</div></div>
+ <div class="card" style="margin-top:12px"><h3 style="margin-top:0">常用单位换算</h3><p class="muted">1 m² = 10.7639 sqft</p><label>平方尺 (sqft)<input id="convert" type="number" value="100" oninput="convertArea()"></label><div class="calc-result" id="convertOut">9.29 m²</div></div>`;
+ areaCalc();priceCalc();convertArea();
+}
+function areaCalc(){let a=(+($('#len')?.value||0))*(+($('#wid')?.value||0));if($('#sqft'))$('#sqft').textContent=a.toFixed(2)+' sqft';if($('#sqm'))$('#sqm').textContent=(a/10.7639).toFixed(2)+' m²'}
+function priceCalc(){let n=(+($('#qty')?.value||0))*(+($('#unit')?.value||0));if($('#priceTotal'))$('#priceTotal').textContent=money(n)}
+function convertArea(){if($('#convertOut'))$('#convertOut').textContent=((+($('#convert')?.value||0))/10.7639).toFixed(2)+' m²'}
+function del(k,i){if(!confirm('确定删除这项资料？'))return;if(k==='clients')clients.splice(i,1);if(k==='quotes')quotes.splice(i,1);if(k==='orders')orders.splice(i,1);persist();render()}
+function backup(){const data={clients,quotes,orders,exportedAt:new Date().toISOString()};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='POROZ-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);clients=d.clients||[];quotes=d.quotes||[];orders=d.orders||[];persist();alert('资料导入成功');home()}catch(err){alert('文件格式不正确')}};r.readAsText(f)}
+render();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
